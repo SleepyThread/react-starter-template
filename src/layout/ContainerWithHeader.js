@@ -7,10 +7,12 @@ class ContainerWithHeader extends React.Component {
 
     render() {
         return (
-            <div className="content container">
-                <Header title={this.props.headTitle}/>
+         <div>
+            <Header title={this.props.headTitle}/>
+            <div className="content container pt-4">
                 {this.props.children}
             </div>
+         </div>
         );
     }
 

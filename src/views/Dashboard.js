@@ -18,7 +18,7 @@ class Dashboard extends React.Component {
         return (
             <ContainerWithHeader headTitle={config.headTitle}>
                 <Row>
-                    <Col sm="12" md={{ size: 4, offset: 4 }}>
+                    <Col xs="12" md="4" >
                         <SimpleCard title="Dashboard Page" body="Hello Bro" buttonText="Press Me!"/>
                     </Col>
                 </Row>

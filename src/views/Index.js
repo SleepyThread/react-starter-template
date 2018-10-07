@@ -1,8 +1,8 @@
 import React from "react";
-import FluidContainerWithHeader from "../layout/FluidContainerWithHeader";
 import SimpleCard from "../component/card/SimpleCard";
 import {Col, Row} from "reactstrap";
 import Conf from "../conf/Configuration";
+import ContainerWithHeader from "../layout/ContainerWithHeader";
 
 
 
@@ -18,14 +18,19 @@ class Index extends React.Component {
     render() {
         let config = this.getConf();
         return (
-                <FluidContainerWithHeader headTitle={config.headTitle}>
+                <ContainerWithHeader headTitle={config.headTitle}>
                     <Row>
-                        <Col sm="12" md={{ size: 2, offset: 4 }}>
-                        <SimpleCard title="Login Page" body="This is a login Page." buttonText="Press Me!" />
+                        <Col xs="12" md="4" >
+                            <SimpleCard title="Login Page" body="This is a login Page." buttonText="Press Me!" />
+                        </Col>
+                        <Col xs="12" md="4" >
+                            <SimpleCard title="Login Page" body="This is a login Page." buttonText="Press Me!" />
+                        </Col>
+                        <Col xs="12" md="4" >
+                            <SimpleCard title="Login Page" body="This is a login Page." buttonText="Press Me!" />
                         </Col>
                     </Row>
-
-                </FluidContainerWithHeader>
+                </ContainerWithHeader>
         );
     }
 

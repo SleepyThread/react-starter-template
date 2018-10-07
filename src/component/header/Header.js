@@ -10,8 +10,10 @@ import {
     UncontrolledDropdown,
     DropdownToggle,
     DropdownMenu,
-    DropdownItem } from 'reactstrap';
+    DropdownItem
+} from 'reactstrap';
 import PropTypes from 'prop-types';
+import './Header.css';
 
 
 class Header extends React.Component {
@@ -24,6 +26,7 @@ class Header extends React.Component {
             isOpen: false
         };
     }
+
     toggle() {
         this.setState({
             isOpen: !this.state.isOpen
@@ -33,35 +36,37 @@ class Header extends React.Component {
 
     render() {
         return (
-            <div>
-                <Navbar color="dark" dark expand="md">
-                    <NavbarBrand href="/" className="mr-auto">{this.props.title}</NavbarBrand>
-                    <NavbarToggler onClick={this.toggle} />
-                    <Collapse isOpen={this.state.isOpen} navbar>
-                        <Nav className="ml-auto" navbar>
-                            <NavItem>
-                                <NavLink href="/dashboard">Dashboard</NavLink>
-                            </NavItem>
-                            <UncontrolledDropdown nav inNavbar>
-                                <DropdownToggle nav caret>
-                                    Settings
-                                </DropdownToggle>
-                                <DropdownMenu right>
-                                    <DropdownItem>
-                                        Setting Option 1
-                                    </DropdownItem>
-                                    <DropdownItem>
-                                        Setting Option 2
-                                    </DropdownItem>
-                                    <DropdownItem divider />
-                                    <DropdownItem>
-                                        Logout
-                                    </DropdownItem>
-                                </DropdownMenu>
-                            </UncontrolledDropdown>
-                        </Nav>
-                    </Collapse>
-                </Navbar>
+            <div className="header">
+                <div className='container'>
+                    <Navbar expand="md">
+                        <NavbarBrand href="/" className="mr-auto">{this.props.title}</NavbarBrand>
+                        <NavbarToggler onClick={this.toggle}/>
+                        <Collapse isOpen={this.state.isOpen} navbar>
+                            <Nav className="ml-auto" navbar>
+                                <NavItem>
+                                    <NavLink href="/dashboard">Dashboard</NavLink>
+                                </NavItem>
+                                <UncontrolledDropdown nav inNavbar>
+                                    <DropdownToggle nav caret>
+                                        Settings
+                                    </DropdownToggle>
+                                    <DropdownMenu right>
+                                        <DropdownItem>
+                                            Setting Option 1
+                                        </DropdownItem>
+                                        <DropdownItem>
+                                            Setting Option 2
+                                        </DropdownItem>
+                                        <DropdownItem divider/>
+                                        <DropdownItem>
+                                            Logout
+                                        </DropdownItem>
+                                    </DropdownMenu>
+                                </UncontrolledDropdown>
+                            </Nav>
+                        </Collapse>
+                    </Navbar>
+                </div>
             </div>
         );
     }

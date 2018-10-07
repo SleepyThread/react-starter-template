@@ -1,6 +1,7 @@
 import {Button, Card, CardText, CardTitle} from "reactstrap";
 import React from "react";
 import PropTypes from 'prop-types';
+import './SimpleCard.css';
 
 class SimpleCard extends React.Component {
 
@@ -11,7 +12,7 @@ class SimpleCard extends React.Component {
             <Card body>
                 <CardTitle>{this.props.title}</CardTitle>
                 <CardText>{this.props.text}</CardText>
-                <Button>{this.props.buttonText}</Button>
+                <Button className="btn btn-primary">{this.props.buttonText}</Button>
             </Card>
         );
 
