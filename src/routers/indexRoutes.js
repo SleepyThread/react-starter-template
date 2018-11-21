@@ -1,10 +1,12 @@
 import Index from "../views/Index";
+import Login from "../views/Login";
 import Dashboard from "../views/Dashboard";
 
 const indexRoutes = {
     routes: [
-        { path: "/dashboard", component: Dashboard },
-        { path: "/", component: Index },
+        { path: "/login", component: Login, isPrivate: false },
+        { path: "/dashboard", component: Dashboard, isPrivate: true },
+        { path: "/", component: Index, isPrivate: false },
     ]};
 
 export default indexRoutes;

@@ -14,6 +14,10 @@ import {
 } from 'reactstrap';
 import PropTypes from 'prop-types';
 import './Header.css';
+import {connect} from "react-redux";
+import { LogoutAction } from "../../redux/action/UserAction";
+import {isLoggedIn} from "../../helper/Autentication";
+import {withRouter} from "react-router";
 
 
 class Header extends React.Component {
@@ -27,12 +31,45 @@ class Header extends React.Component {
         };
     }
 
-    toggle() {
+    toggle = () => {
         this.setState({
             isOpen: !this.state.isOpen
         });
-    }
+    };
 
+    performLogout = () => {
+        localStorage.removeItem("isLoggedIn");
+        // Perform API Request.
+        this.props.logout();
+        this.props.history.push("/login");
+    };
+
+    getUserAction = () => {
+        if (!isLoggedIn()) {
+            return (
+                <NavItem>
+                    <NavLink href="/login">Login</NavLink>
+                </NavItem>
+            );
+        } else {
+            return (
+                <UncontrolledDropdown nav inNavbar>
+                    <DropdownToggle nav caret>
+                        {this.props.userName}
+                    </DropdownToggle>
+                    <DropdownMenu right>
+                        <DropdownItem>
+                            User Profile
+                        </DropdownItem>
+                        <DropdownItem divider/>
+                        <DropdownItem onClick={this.performLogout}>
+                            Logout
+                        </DropdownItem>
+                    </DropdownMenu>
+                </UncontrolledDropdown>
+            );
+        }
+    };
 
     render() {
         return (
@@ -41,28 +78,10 @@ class Header extends React.Component {
                     <Navbar expand="md">
                         <NavbarBrand href="/" className="mr-auto">{this.props.title}</NavbarBrand>
                         <NavbarToggler onClick={this.toggle}/>
+
                         <Collapse isOpen={this.state.isOpen} navbar>
                             <Nav className="ml-auto" navbar>
-                                <NavItem>
-                                    <NavLink href="/dashboard">Dashboard</NavLink>
-                                </NavItem>
-                                <UncontrolledDropdown nav inNavbar>
-                                    <DropdownToggle nav caret>
-                                        Settings
-                                    </DropdownToggle>
-                                    <DropdownMenu right>
-                                        <DropdownItem>
-                                            Setting Option 1
-                                        </DropdownItem>
-                                        <DropdownItem>
-                                            Setting Option 2
-                                        </DropdownItem>
-                                        <DropdownItem divider/>
-                                        <DropdownItem>
-                                            Logout
-                                        </DropdownItem>
-                                    </DropdownMenu>
-                                </UncontrolledDropdown>
+                                {this.getUserAction()}
                             </Nav>
                         </Collapse>
                     </Navbar>
@@ -75,6 +94,23 @@ class Header extends React.Component {
 
 Header.propTypes = {
     title: PropTypes.string.isRequired,
+    userName: PropTypes.string.isRequired,
+
+    history: PropTypes.func.isRequired,
 };
 
-export default Header;
+const mapStateToProps = (state) => {
+    return {
+        isLoggedIn: state.UserReducers.isLoggedIn,
+        userName: state.UserReducers.userName
+    }
+};
+
+const mapDispatchToProps = dispatch => {
+    return {
+        logout: LogoutAction(dispatch)
+    };
+};
+
+
+export default connect(mapStateToProps, mapDispatchToProps)(withRouter(Header));

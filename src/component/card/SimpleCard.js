@@ -20,7 +20,7 @@ class SimpleCard extends React.Component {
 
 }
 
-SimpleCard.PropTypes = {
+SimpleCard.proptypes = {
     title: PropTypes.string.isRequired,
     body: PropTypes.string.isRequired,
     buttonText: PropTypes.string.isRequired,
